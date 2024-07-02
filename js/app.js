@@ -15,10 +15,15 @@ document.addEventListener('DOMContentLoaded', ()=>{
     link.addEventListener('click', (e) => {
       e.preventDefault();
       const targetSection = document.querySelector(e.target.getAttribute('href'));
-      targetSection.scrollIntoView({ behavior:'smooth' });
+      const offsetTop = targetSection.offsetTop - document.querySelector('header').offsetHeight;
+      window.scrollTo({
+        top: offsetTop,
+        behavior: 'smooth'
+      });
       highlightLink(e);
     });
   });
+  
 
   const highlightLink = (e) => {
     links.forEach(link => link.classList.remove('active'));
@@ -28,7 +33,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
   const scrollToTopBtn = document.getElementById('scrollToTopBtn');
 
   function toggleScrollToTopButton() {
-      if (window.scrollY > window.innerHeight * 0.6) {
+      if (window.scrollY > window.innerHeight * 0.9) {
           scrollToTopBtn.style.display = 'block';
       } else {
           scrollToTopBtn.style.display = 'none';
